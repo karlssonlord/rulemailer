@@ -24,3 +24,7 @@ script:
     - rm -rf vendor/magento
     - rm -rf vendor/autoload.php
     - rm -rf vendor/composer/autoload_classmap.php
+
+notifications:
+  flowdock:
+    secure: FLOWDOCK_KEY
