@@ -1,0 +1,25 @@
+
+-
+    request:
+        method: GET
+        url: 'http://app.rule.io/api/v1/subscribers/david@karlssonlord.com/tags?apikey=fe003356-c796a3a-52d65bc-c48ce37-dbb9511be24&identified_by=email'
+        headers:
+            Host: app.rule.io
+            Accept-Encoding: null
+            Accept-Charset: 'ISO-8859-1,utf-8'
+            User-Agent: 'Guzzle/5.2.0 curl/7.37.1 PHP/5.4.35'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Server: nginx
+            Content-Type: application/json
+            Transfer-Encoding: chunked
+            Connection: keep-alive
+            Cache-Control: no-cache
+            Date: 'Thu, 12 Mar 2015 18:03:49 GMT'
+            Set-Cookie: 'laravel_session=eyJpdiI6Ik5yMVNiS0RBOHEwMzZ1ODdcL0NwamNEelNzejhxZktuSHNqMHRYalhXM0tNPSIsInZhbHVlIjoidlwvMlg1SnJDRUtXeFVsbHhWN2k4Y25UdHM0eUU5TE1YekZRcEVTRk8wVDBHMWJHVThtQVZLQVBVeTNHWkhlakt6XC9FNms5NnNZTGZwQmtTYU9keGxqUT09IiwibWFjIjoiNDliMmJlYzdmMWFjMDY4N2RlYjcwMDI3MjY0MjMzNDRiNThkOTU4MjNiNzk4NDU2MDMzY2M1ZTc5YzY3MDU0YSJ9; expires=Thu, 12-Mar-2015 20:03:49 GMT; Max-Age=7200; path=/; httponly'
+        body: '{"tags":[{"id":944,"name":"newsletter"}]}'

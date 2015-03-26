@@ -1,0 +1,48 @@
+{
+    "name": "karlssonlord/rulemailer",
+    "authors": [
+      {
+        "name": "Andreas Karlsson",
+        "email": "andreas@karlssonlord.com"
+      },
+      {
+        "name": "David Wickström",
+        "email": "david@karlssonlord.com"
+      }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "guzzlehttp/guzzle": "~5.2"
+    },
+    "require-dev": {
+        "magento-hackathon/magento-composer-installer": "*",
+        "magento/core": "1.9.1.0",
+        "phpunit/phpunit": "~4.5",
+        "php-vcr/php-vcr": "~1.2",
+        "php-vcr/phpunit-testlistener-vcr": "~1.1",
+        "mockery/mockery": "0.9.*",
+        "vlucas/phpdotenv": "~1.1"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://packages.firegento.com"
+        }
+    ],
+    "extra":{
+        "magento-root-dir": "src/",
+        "magento-deploystrategy": "symlink",
+        "auto-append-gitignore": true
+    },
+    "autoload": {
+        "psr-0": {
+            "": [
+                "src/app",
+                "src/app/code/local",
+                "src/app/code/community",
+                "src/app/code/core",
+                "src/lib"
+            ]
+        }
+    }
+}

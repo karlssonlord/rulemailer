@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <kl_rulemailer_settings translate="label" module="rulemailer">
+            <label>RuleMailer</label>
+            <tab>customer</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>404</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>1</sort_order>
+                    <fields>
+                        <key translate="label comment">
+                            <label>API Key</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Your secret API key.]]></comment>
+                        </key>
+                        <transactional translate="label comment">
+                            <label>Enable transactional</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>30</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>
+                                <![CDATA[Send transactional emails with RuleMailer.]]>
+                            </comment>
+                        </transactional>
+                        <logging translate="label comment">
+                            <label>Enable logging</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>40</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>
+                                <![CDATA[When enabled all requests will be logged to KL_Rulemailer.log]]>
+                            </comment>
+                        </logging>
+                    </fields>
+                </general>
+            </groups>
+        </kl_rulemailer_settings>
+    </sections>
+</config>

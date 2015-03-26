@@ -1,0 +1,28 @@
+
+-
+    request:
+        method: DELETE
+        url: 'http://app.rule.io/api/v1/subscribers/david@karlssonlord.com/tags/test?apikey=fe003356-c796a3a-52d65bc-c48ce37-dbb9511be24'
+        headers:
+            Host: app.rule.io
+            Expect: null
+            Accept-Encoding: null
+            Accept-Charset: 'ISO-8859-1,utf-8'
+            User-Agent: 'Guzzle/5.2.0 curl/7.37.1 PHP/5.4.35'
+            Content-Type: application/json
+            Accept: null
+        body: '{"identified_by":"email"}'
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: OK
+        headers:
+            Server: nginx
+            Content-Type: application/json
+            Transfer-Encoding: chunked
+            Connection: keep-alive
+            Cache-Control: no-cache
+            Date: 'Thu, 12 Mar 2015 18:07:00 GMT'
+            Set-Cookie: 'laravel_session=eyJpdiI6IlwvVjdzMFF3aXd1UWdhTjNmanhFM05LczVqajBOS2dFakVJOU9NS2NKYnA4PSIsInZhbHVlIjoiUzA0MENqbjdqWCtURnRzS1JWQ0loMmZnZVpUaUxBd3ZWeU1nUGRFZUgxU1c1dEhEQzdaQkZqaUtQV1V5QnhLUW9EMVpwRnV5K3VXUitmWDVHRE9RRVE9PSIsIm1hYyI6ImQyMTNjMGY5NjhjNDFmODljYzRlMDBiMWRhY2Q4ODg3MmE3NDg3NGUyMjE0YmY0N2Q0Y2FlZjAwNTk5MzhkMzMifQ%3D%3D; expires=Thu, 12-Mar-2015 20:07:00 GMT; Max-Age=7200; path=/; httponly'
+        body: '{"message":"Success"}'

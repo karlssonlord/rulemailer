@@ -1,0 +1,4 @@
+/vendor/
+n98-magerun.phar
+.env
+tests/_output/*
