@@ -2,6 +2,10 @@
     "name": "karlssonlord/rulemailer",
     "authors": [
       {
+        "name": "Robert Lord",
+        "email": "robert@karlssonlord.com"
+      },
+      {
         "name": "Andreas Karlsson",
         "email": "andreas@karlssonlord.com"
       },
