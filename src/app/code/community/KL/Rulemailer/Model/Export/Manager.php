@@ -1,5 +1,9 @@
 <?php
 
+(@include_once MAGENTO_ROOT . '/../vendor/autoload.php') ||
+(@include_once MAGENTO_ROOT . '/../../vendor/autoload.php') ||
+@include_once MAGENTO_ROOT . '/../../../vendor/autoload.php';
+
 /**
  * Class KL_Rulemailer_Model_Export_Manager
  */
@@ -48,7 +52,9 @@ class KL_Rulemailer_Model_Export_Manager
      */
     public function exportData()
     {
-        foreach ($this->getOrdersCollection() as $order) {
+        $orders = $this->getOrdersCollection();
+        if ($orders->getSize() === 0) return;
+        foreach ($orders as $order) {
             if ($this->isOrderedBySubscriber($order->getCustomerEmail())) {
                 try {
                     $this->exportClerk->conductExport($order);

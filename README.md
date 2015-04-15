@@ -17,6 +17,8 @@ Move files to the right place or use modman/composer to deploy them. Flush the c
 
     composer install --no-dev
 
+You have to run this command regardless of whether composer is used to deploy the module into the Magento app. Otherwise module dependencies will not be loaded.
+
 ### Modman
 
     modman deploy KL_Rulemailer
