@@ -4,7 +4,6 @@ class ObserverTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        Mage::getModel('core/config')->saveConfig('kl_rulemailer_settings/general/logging', 1);
         Mage::getConfig()->reinit();
         Mage::app()->reinitStores();
     }

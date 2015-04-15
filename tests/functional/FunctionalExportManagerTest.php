@@ -8,7 +8,6 @@ class FunctionalExportManagerTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
-        Mage::getModel('core/config')->saveConfig('kl_rulemailer/general/logging', 1);
     }
 
     /**
