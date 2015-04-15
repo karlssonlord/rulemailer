@@ -58,7 +58,7 @@ class KL_Rulemailer_Model_Export_Manager
             if ($this->isOrderedBySubscriber($order->getCustomerEmail())) {
                 try {
                     $this->exportClerk->conductExport($order);
-                } catch (Exception $e) {die(var_dump($e->getMessage()));
+                } catch (Exception $e) {
                     Mage::log($e->getMessage(), null, 'rulemailer.log', true);
                 }
             }
