@@ -53,7 +53,7 @@ class KL_Rulemailer_Model_Export_Manager
     public function exportData()
     {
         $orders = $this->getOrdersCollection();
-        if ($orders->getSize() === 0) return;
+        if (count($orders) === 0) return;
         foreach ($orders as $order) {
             if ($this->isOrderedBySubscriber($order->getCustomerEmail())) {
                 try {
