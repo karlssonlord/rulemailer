@@ -44,4 +44,14 @@
             </newsletter_subscriber_save_commit_after>
         </events>
     </global>
+    <crontab>
+        <jobs>
+            <export_data_to_rule_mailer>
+                <schedule>
+                    <cron_expr>*/5 * * * *</cron_expr>
+                </schedule>
+                <run><model>rulemailer/export_manager::exportData</model></run>
+            </export_data_to_rule_mailer>
+        </jobs>
+    </crontab>
 </config>

@@ -166,7 +166,7 @@ class KL_Rulemailer_Model_Observer extends KL_Rulemailer_Model_Abstract
      */
     private function getApiSubscriber()
     {
-        return $this->apiSubscriber ? : Mage::getSingleton('rulemailer/api_subscriber');
+        return $this->apiSubscriber ? : Mage::getSingleton('rulemailer/api_subscriber', null);
     }
 
     /**
