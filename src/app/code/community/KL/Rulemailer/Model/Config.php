@@ -21,7 +21,7 @@ class KL_Rulemailer_Model_Config extends KL_Rulemailer_Model_Abstract
     {
         $configKey = join(array(self::SECTION, $group, $key), '/');
 
-        if (Mage::getStoreConfigFlag($configKey)) {
+        if (!is_null(Mage::getStoreConfig($configKey))) {
             return Mage::getStoreConfig($configKey);
         } else {
             throw new InvalidArgumentException(
