@@ -5,7 +5,8 @@ class ExportManagerTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
+        Mage::init();
+//        Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
     }
     /** @test */
     public function it_gathers_data_and_feeds_it_to_the_export_clerk()

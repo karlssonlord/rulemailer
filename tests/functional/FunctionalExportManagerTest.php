@@ -8,8 +8,7 @@ class FunctionalExportManagerTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        ini_set('error_reporting', 2047);
-        Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
+        Mage::init();
     }
 
     /**
