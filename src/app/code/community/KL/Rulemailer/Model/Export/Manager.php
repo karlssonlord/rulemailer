@@ -1,9 +1,4 @@
 <?php
-if (PHP_SAPI !== 'cli') {
-    (require_once MAGENTO_ROOT . '/../vendor/autoload.php') ||
-    (require_once MAGENTO_ROOT . '/../../vendor/autoload.php') ||
-    (require_once MAGENTO_ROOT . '/../../../vendor/autoload.php');
-}
 
 /**
  * Class KL_Rulemailer_Model_Export_Manager

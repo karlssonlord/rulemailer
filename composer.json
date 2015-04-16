@@ -14,10 +14,6 @@
         "email": "david@karlssonlord.com"
       }
     ],
-    "require": {
-        "php": ">=5.4.0",
-        "guzzlehttp/guzzle": "~5.2"
-    },
     "require-dev": {
         "magento-hackathon/magento-composer-installer": "2.1.1",
         "magento/core": "1.9.1.0",

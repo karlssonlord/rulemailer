@@ -1,9 +1,5 @@
 <?php
 
-if (PHP_SAPI !== 'cli') {
-(include_once MAGENTO_ROOT . '/../vendor/autoload.php') || include_once MAGENTO_ROOT . '/../../../autoload.php';
-}
-
 /**
  * Observer model
  */

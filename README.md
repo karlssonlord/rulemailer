@@ -11,28 +11,10 @@ Magento module for integrating RuleMailer into Magento CE/EE.
 
 ## Install
 
-Use [Composer](http://getcomposer.org) to install this module's dependencies.
-
-    composer install --no-dev
-
-Use [Modman](https://github.com/colinmollenhour/modman) or [Composer](https://github.com/Cotya/magento-composer-installer) to deploy them this module into your Magento app. Flush the cache and logout admin user before visiting the configuration section in admin backend.
-
-## Module assumes
-#### MAGENTO_ROOT placement
-Currently this module makes the assumption that the MAGENTO_ROOT is place in a subdirectory from your project root.
-
-Either like this
-
-	src/{MAGENTO_ROOT}
-
-...or like this
-
-	src/magento/{MAGENTO_ROOT}
-
-Directory names won't matter.
+This module can be installed which ever way you like, either through modman or composer, or if you want to you can manually place the files into the correct places.
 
 #### Cron setup
-It also assumes that the *Magento cron* is running on your server. Ohterwise there will be no customer data exported to Rule, other than the subscriber email.
+This module assumes that the *Magento cron* is running on your server. Otherwise there will be no customer data exported to Rule, other than the subscriber email.
 
 Example crontab for Unix type servers:
 

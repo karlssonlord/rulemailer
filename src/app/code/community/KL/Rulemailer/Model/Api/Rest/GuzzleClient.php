@@ -1,7 +1,8 @@
-<?php 
+<?php
 
-use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Client as GuzzleClient;
+require_once __DIR__ . '/guzzle.phar';
+
+use GuzzleHttp\Client;
 
 /**
  * Class KL_Rulemailer_Model_Api_Rest_GuzzleClient
@@ -20,11 +21,11 @@ class KL_Rulemailer_Model_Api_Rest_GuzzleClient implements KL_Rulemailer_Model_A
     private $httpClient = null;
 
     /**
-     * @param ClientInterface $client
+     * @param $client
      */
-    public function __construct(ClientInterface $client = null)
+    public function __construct($client)
     {
-        $client = $client ? : new GuzzleClient([
+        $client = $client ? : new Client([
             'base_url' => self::BASE_URL,
             'defaults' => [
                 'headers' => ['Accept-Charset' => 'ISO-8859-1,utf-8'],
