@@ -17,7 +17,8 @@ Use [Composer](http://getcomposer.org) to install this module's dependencies.
 
 Use [Modman](https://github.com/colinmollenhour/modman) or [Composer](https://github.com/Cotya/magento-composer-installer) to deploy them this module into your Magento app. Flush the cache and logout admin user before visiting the configuration section in admin backend.
 
-### Module assumes
+## Module assumes
+#### MAGENTO_ROOT placement
 Currently this module makes the assumption that the MAGENTO_ROOT is place in a subdirectory from your project root.
 
 Either like this
@@ -29,6 +30,13 @@ Either like this
 	src/magento/{MAGENTO_ROOT}
 
 Directory names won't matter.
+
+#### Cron setup
+It also assumes that the *Magento cron* is running on your server. Ohterwise there will be no customer data exported to Rule, other than the subscriber email.
+
+Example crontab for Unix type servers:
+
+	*/5 * * * *  /bin/sh /absolute/path/to/magento/cron.sh
 
 
 ## Usage
