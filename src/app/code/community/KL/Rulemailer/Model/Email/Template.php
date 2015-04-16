@@ -32,7 +32,7 @@ class KL_Rulemailer_Model_Email_Template
     public function send($email, $name = null, array $variables = array())
     {
         if (!Mage::getSingleton('rulemailer/config')->get('transactional')) {
-            Mage::log('Transacationals not enabled.', null, 'api.log', true);
+            Mage::log('Transactionals not enabled.', null, 'api.log', true);
             return parent::send($email, $name, $variables);
         }
 

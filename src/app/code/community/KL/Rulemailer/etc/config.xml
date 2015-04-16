@@ -58,6 +58,7 @@
         <kl_rulemailer_settings>
             <general>
                 <logging>1</logging>
+                <transactional>0</transactional>
             </general>
         </kl_rulemailer_settings>
     </default>
