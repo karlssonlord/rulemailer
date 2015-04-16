@@ -6,22 +6,30 @@ Magento module for integrating RuleMailer into Magento CE/EE.
 
 ## Requirements
 
-- PHP 5.4 or above
-- Magento 1.9.* - earlier versions might work, but remains untested
+- PHP 5.4.* or PHP 5.5.*
+- Magento 1.9.* - earlier versions might work, but remains untested and those version do not officially support PHP 5.4 either...
 
 ## Install
 
-Move files to the right place or use modman/composer to deploy them. Flush the cache and logout admin user before visiting the configuration section in admin backend.
-
-### Composer
+Use [Composer](http://getcomposer.org) to install this module's dependencies.
 
     composer install --no-dev
 
-You have to run this command regardless of whether composer is used to deploy the module into the Magento app. Otherwise module dependencies will not be loaded.
+Use [Modman](https://github.com/colinmollenhour/modman) or [Composer](https://github.com/Cotya/magento-composer-installer) to deploy them this module into your Magento app. Flush the cache and logout admin user before visiting the configuration section in admin backend.
 
-### Modman
+### Module assumes
+Currently this module makes the assumption that the MAGENTO_ROOT is place in a subdirectory from your project root.
 
-    modman deploy KL_Rulemailer
+Either like this
+
+	src/{MAGENTO_ROOT}
+
+...or like this
+
+	src/magento/{MAGENTO_ROOT}
+
+Directory names won't matter.
+
 
 ## Usage
 
