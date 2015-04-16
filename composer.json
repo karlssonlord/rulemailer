@@ -19,7 +19,7 @@
         "guzzlehttp/guzzle": "~5.2"
     },
     "require-dev": {
-        "magento-hackathon/magento-composer-installer": "*",
+        "magento-hackathon/magento-composer-installer": "2.1.1",
         "magento/core": "1.9.1.0",
         "phpunit/phpunit": "~4.5",
         "php-vcr/php-vcr": "~1.2",

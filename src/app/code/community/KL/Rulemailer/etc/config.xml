@@ -55,10 +55,10 @@
         </jobs>
     </crontab>
     <default>
-        <kl_rulemailer>
+        <kl_rulemailer_settings>
             <general>
                 <logging>1</logging>
             </general>
-        </kl_rulemailer>
+        </kl_rulemailer_settings>
     </default>
 </config>
