@@ -20,7 +20,8 @@ install:
     - sh install.sh
 
 script:
-    - vendor/bin/phpunit
+    - vendor/bin/phpunit tests/unit/
+    - vendor/bin/phpunit tests/functional/
     - rm -rf vendor/magento
     - rm -rf vendor/autoload.php
     - rm -rf vendor/composer/autoload_classmap.php

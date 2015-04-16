@@ -1,8 +1,9 @@
 <?php
-
-(@include_once MAGENTO_ROOT . '/../vendor/autoload.php') ||
-(@include_once MAGENTO_ROOT . '/../../vendor/autoload.php') ||
-@include_once MAGENTO_ROOT . '/../../../vendor/autoload.php';
+if (PHP_SAPI !== 'cli') {
+    (require_once MAGENTO_ROOT . '/../vendor/autoload.php') ||
+    (require_once MAGENTO_ROOT . '/../../vendor/autoload.php') ||
+    (require_once MAGENTO_ROOT . '/../../../vendor/autoload.php');
+}
 
 /**
  * Class KL_Rulemailer_Model_Export_Manager
@@ -42,8 +43,8 @@ class KL_Rulemailer_Model_Export_Manager
     public function __construct($newsletterSubscriber = null, $lastOrderId = null, $exportClerk = null, $order = null)
     {
         $this->newsletterSubscriber = $newsletterSubscriber ? : Mage::getModel('newsletter/subscriber');
-        $this->lastOrderId = $lastOrderId ? : Mage::getSingleton('foo/bar/baz');
-        $this->exportClerk = $exportClerk ? : Mage::getModel('rulemailer/export_clerk');
+        $this->lastOrderId = $lastOrderId ? : Mage::getStoreConfig('kl_rulemailer/last_exported/order_id');
+        $this->exportClerk = $exportClerk ? : Mage::getModel('rulemailer/export_clerk', null);
         $this->order = $order ? : Mage::getModel('sales/order');
     }
 

@@ -54,4 +54,11 @@
             </export_data_to_rule_mailer>
         </jobs>
     </crontab>
+    <default>
+        <kl_rulemailer>
+            <general>
+                <logging>1</logging>
+            </general>
+        </kl_rulemailer>
+    </default>
 </config>

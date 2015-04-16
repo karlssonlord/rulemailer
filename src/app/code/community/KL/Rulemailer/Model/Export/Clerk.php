@@ -21,7 +21,7 @@ class KL_Rulemailer_Model_Export_Clerk
      */
     public function __construct(KL_Rulemailer_Model_Api_Subscriber $api = null, KL_Rulemailer_Model_Export_FieldsBuilder $fieldsBuilder = null)
     {
-        $this->remoteSubscriber = $api ? : Mage::getModel('rulemailer/api_subscriber');
+        $this->remoteSubscriber = $api ? : Mage::getModel('rulemailer/api_subscriber', null);
         $this->fieldsBuilder = $fieldsBuilder ? : new KL_Rulemailer_Model_Export_FieldsBuilder;
     }
 
