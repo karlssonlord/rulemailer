@@ -29,7 +29,7 @@ class SubscriberEndpointTest extends PHPUnit_Framework_TestCase
         $response = $subscriberEndpoint->findAll();
 
         $this->assertEquals(200, $response->isSuccess());
-        $this->assertEquals(26, $response->toValue()['number_of_subscribers']);
+        $this->assertEquals(28, $response->toValue()['number_of_subscribers']);
     }
 
     /**
