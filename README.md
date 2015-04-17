@@ -1,8 +1,9 @@
-# Karlsson & Lord RuleMailer Magento Extension
+# RuleMailer Magento Extension
 
 [![Build Status](https://travis-ci.org/karlssonlord/rulemailer.svg)](https://travis-ci.org/karlssonlord/rulemailer)
 
-Magento module for integrating RuleMailer into Magento CE/EE.
+Magento module for integrating RuleMailer into Magento CE/EE. This module keeps your newsletter subscribers in sync and is also capable of exporting subscriber order data.
+Data export happens asynchronously, not to induce potential delays. For example if the subscribe-action takes place as part of the checkout process.
 
 ## Requirements
 
