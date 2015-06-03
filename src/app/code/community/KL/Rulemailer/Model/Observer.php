@@ -76,9 +76,6 @@ class KL_Rulemailer_Model_Observer extends KL_Rulemailer_Model_Abstract
                     $this->addSubscriber($dummyCustomer, array(), array());
                 }
             } else {
-                /**
-                 * Customer was found
-                 */
 
                 /**
                  * Load customer object
@@ -167,7 +164,7 @@ class KL_Rulemailer_Model_Observer extends KL_Rulemailer_Model_Abstract
      */
     private function getApiSubscriber()
     {
-        return $this->apiSubscriber ? : Mage::getSingleton('rulemailer/api_subscriber', null);
+        return $this->apiSubscriber ? : Mage::getModel('rulemailer/api_subscriber', null);
     }
 
     /**
@@ -211,10 +208,10 @@ class KL_Rulemailer_Model_Observer extends KL_Rulemailer_Model_Abstract
      */
     public function removeSubscriber($customer)
     {
-        $response = $this->getApiSubscriber()->removeTag('newsletter',$customer->getData('email'));
+        $response = $this->getApiSubscriber()->removeTag('newsletter', $customer->getData('email'));
 
         if ($response->isError()) {
-            $this->logData("When removing subscriber tag (" . $customer->getData('email') . "), get code error: " . $response->getError());
+           return  $this->logData("When removing subscriber tag (" . $customer->getData('email') . "), got code error: " . $response->getError());
         }
 
         $this->logData("Removed tag newsletter from subscriber " . $customer->getData('email'));
