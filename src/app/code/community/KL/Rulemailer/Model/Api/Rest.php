@@ -13,9 +13,10 @@ abstract class KL_Rulemailer_Model_Api_Rest
     protected $client;
 
     /**
+     * @param null                                $foo
      * @param KL_Rulemailer_Model_Api_Rest_Client $client
      */
-    public function __construct(KL_Rulemailer_Model_Api_Rest_Client $client = null)
+    public function __construct($foo = null, KL_Rulemailer_Model_Api_Rest_Client $client = null)
     {
         $this->client = $client ? : new KL_Rulemailer_Model_Api_Rest_GuzzleClient;
     }
