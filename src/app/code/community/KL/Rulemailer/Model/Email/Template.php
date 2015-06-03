@@ -56,7 +56,7 @@ class KL_Rulemailer_Model_Email_Template
 
         foreach ($emails as $key => $email) {
             try {
-                    $result = Mage::getModel('rulemailer/api_transactional')->sendEmail(
+                    $result = Mage::getModel('rulemailer/api_transactional', null)->sendEmail(
                         $this->getProcessedTemplateSubject($variables),
                         array('name' => $this->getSenderName(), 'email' => $this->getSenderEmail()),
                         array('name' => $names[$key], "email" => $email),
