@@ -1,57 +1,62 @@
 <?php
 
+use MageTest\Manager\Factory;
+
 class FieldsBuilderTest extends PHPUnit_Framework_TestCase
 {
+    use HandleAttributes;
+
+    public function setUp()
+    {
+        Factory::prepareDb();
+    }
+
+    public function tearDown()
+    {
+        Factory::clear();
+    }
+
     /** @test */
     public function it_builds_up_the_fields_structures()
     {
-        $category = Mockery::mock('Mage_Catalog_Model_Category');
-        $category->shouldReceive('getIncrementId')->once()->andReturn('foo');
-        $category->shouldReceive('load')->once()->andReturn($category);
-        $category->shouldReceive('getName')->andReturn('x');
+        $this->addAttributeOption('manufacturer', 'Union Carbide');
+        $this->addAttributeToAttributeSet(81, 4, 'Default');
 
-        $product = Mockery::mock('Mage_Catalog_Model_Product');
-        $product->shouldReceive('getSku')->andReturn('foo');
-        $product->shouldReceive('getId')->andReturn(1);
-        $product->shouldReceive('load')->andReturn($product);
-        $product->shouldReceive('getCategoryIds')->andReturn('1');
-        $product->shouldReceive('getAttributeText')->andReturn('bar');
+        $product = Factory::make('catalog/product', [
+            'sku' => 'foo',
+            'weight' => 1.0,
+            'special_price' => null,
+            'price' => 495.0,
+            'color' => 'Brun',
+            'manufacturer' => 3
+        ]);
 
-        $fieldsBuilder = new KL_Rulemailer_Model_Export_FieldsBuilder($category, $product);
+        $quote = Factory::with($product)->make('sales/quote');
+        $order = Factory::with($quote)->make('sales/order');
 
-        $order = Mockery::mock('Mage_Sales_Model_Order');
-        $order->shouldReceive('getAllVisibleItems')->once()->andReturn(array($product));
-        $order->shouldReceive('getIncrementId')->once()->andReturn('123123');
-        $order->shouldReceive('getSku')->once()->andReturn('foo');
-        $order->shouldReceive('getGrandTotal')->once()->andReturn('500');
-        $order->shouldReceive('getCouponCode')->once()->andReturn('TEST');
-        $order->shouldReceive('getBaseShippingInvoiced')->once()->andReturn('50');
-        $order->shouldReceive('getStoreId')->once()->andReturn(1);
-        $order->shouldReceive('getWeight')->once()->andReturn(1);
-        $order->shouldReceive('getStoreCurrencyCode')->once()->andReturn('SEK');
-        $order->shouldReceive('getShippingMethod')->once()->andReturn('flatrate_flatrate');
-        $order->shouldReceive('getDiscountAmount')->once()->andReturn(10.0000);
-        $order->shouldReceive('getShippingAmount')->once()->andReturn(5.0000);
-
+        $fieldsBuilder = new KL_Rulemailer_Model_Export_FieldsBuilder;
         $fields = $fieldsBuilder->extractFields($order);
 
         $expected = [
-            ['key' => 'Order.Id', 'value' => '123123'],
-            ['key' => 'Order.Sku', 'value' => 'foo'],
+            ['key' => 'Order.Color', 'value' => 'Brun'],
+            ['key' => 'Order.Id', 'value' => $order->getIncrementId()],
+            ['key' => 'Order.Date', 'value' => $order->getCreatedAt()],
+            ['key' => 'Order.TaxAmount', 'value' => 0],
+            ['key' => 'Order.Sku', 'value' => ['foo']],
             ['key' => 'Order.StoreId', 'value' => 1],
-            ['key' => 'Order.Categories', 'value' => "x"],
+            ['key' => 'Order.Categories', 'value' => []],
             ['key' => 'Order.Weight', 'value' => 1.0],
             ['key' => 'Order.GrandTotal', 'value' => 500.0],
-            ['key' => 'Order.StoreCurrencyCode', 'value' => 'SEK'],
+            ['key' => 'Order.StoreCurrencyCode', 'value' => 'EUR'],
             ['key' => 'Order.ShippingMethod', 'value' => 'flatrate_flatrate'],
-            ['key' => 'Order.Coupon', 'value' =>'TEST'],
-            ['key' => 'Order.DiscountAmount', 'value' => 10.0000],
+            ['key' => 'Order.Coupon', 'value' => ''],
+            ['key' => 'Order.DiscountAmount', 'value' => 0],
+            ['key' => 'Order.DiscountPercent', 'value' => 0],
             ['key' => 'Order.ShippingAmount', 'value' => 5.0000],
-            ['key' => 'Order.Brands', 'value' => 'bar']
+            ['key' => 'Order.Brands', 'value' => ['Union Carbide']]
         ];
 
         $this->assertEquals($expected, $fields);
     }
-
 }
  
