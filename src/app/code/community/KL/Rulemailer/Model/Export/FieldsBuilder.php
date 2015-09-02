@@ -28,13 +28,21 @@ class KL_Rulemailer_Model_Export_FieldsBuilder
     public function extractFields(Mage_Sales_Model_Order $order)
     {
         $fieldSet =  [
-            ['key' => 'Order.Id', 'value' => (string)$order->getIncrementId()],
-            ['key' => 'Order.Date', 'value' => (string)$order->getCreatedAt()],
+            ['key' => 'Order.IncrementId', 'value' => (string)$order->getIncrementId()],
+            ['key' => 'Order.Date', 'value' => (string)$order->getCreatedAt(), 'type' => 'date'],
+            ['key' => 'Order.Firstname', 'value' => (string)$order->getCustomerFirstname()],
+            ['key' => 'Order.Lastname', 'value' => (string)$order->getCustomerLastname()],
+            ['key' => 'Order.Street', 'value' => (string)$order->getShippingAddress()->getStreet1()],
+            ['key' => 'Order.City', 'value' => (string)$order->getShippingAddress()->getCity()],
+            ['key' => 'Order.Postcode', 'value' => (string)$order->getShippingAddress()->getPostcode()],
+            ['key' => 'Order.Country', 'value' => (string)$order->getShippingAddress()->getCountry()],
+            ['key' => 'Order.Phone', 'value' => (string)$order->getShippingAddress()->getTelephone()],
             ['key' => 'Order.TaxAmount', 'value' => (float)$this->getTaxAmount($order)],
-            ['key' => 'Order.Sku', 'value' => (array)$this->getOrderSkus($order)],
+            ['key' => 'Order.Sku', 'value' => (array)$this->getOrderSkus($order), 'type' => 'multiple'],
             ['key' => 'Order.StoreId', 'value' => (integer)$order->getStoreId()],
-            ['key' => 'Order.Categories', 'value' => (array)$this->getCategoryNames($order)],
+            ['key' => 'Order.Categories', 'value' => (array)$this->getCategoryNames($order), 'type' => 'multiple'],
             ['key' => 'Order.Weight', 'value' => (float)$order->getWeight()],
+            ['key' => 'Order.Subtotal', 'value' => (float)$order->getSubtotal()],
             ['key' => 'Order.GrandTotal', 'value' => (float)$order->getGrandTotal()],
             ['key' => 'Order.StoreCurrencyCode', 'value' => (string)$order->getStoreCurrencyCode()],
             ['key' => 'Order.ShippingMethod', 'value' => (string)$order->getShippingMethod()],
@@ -42,7 +50,7 @@ class KL_Rulemailer_Model_Export_FieldsBuilder
             ['key' => 'Order.DiscountAmount', 'value' => (float)$order->getDiscountAmount()],
             ['key' => 'Order.DiscountPercent', 'value' => (float)$this->getDiscountPercent($order)],
             ['key' => 'Order.ShippingAmount', 'value' => (float)$order->getShippingAmount()],
-            ['key' => 'Order.Brands', 'value' => (array)$this->getBrands($order)]
+            ['key' => 'Order.Brands', 'value' => (array)$this->getBrands($order), 'type' => 'multiple']
         ];
 
         return $this->addArbitraryFields($fieldSet, $order);
@@ -135,7 +143,14 @@ class KL_Rulemailer_Model_Export_FieldsBuilder
             }
         }
 
-        return array_merge($this->buildFields($attributes), $fieldSet);
+        // I got into this mess of throwing booleans around. Haven't got time to redo this.
+        // Suck...
+        $additionalAttributes = $this->buildFields($attributes);
+        if ($additionalAttributes) {
+            return array_merge($additionalAttributes, $fieldSet);
+        }
+
+        return $fieldSet;
     }
 
 
@@ -166,23 +181,21 @@ class KL_Rulemailer_Model_Export_FieldsBuilder
                 $fields[] = $keyValue;
             }
         }
+
         return $fields;
     }
 
     private function buildKeyValue($attributeKey, $attributeValue)
     {
-        $value = $this->getValue($attributeValue);
-        if (!count($value) || !$value) {
-            return false;
-        }
-        return ['key' => 'Order.'.ucfirst($attributeKey), 'value' => $value];
+        if (count($attributeValue) == 1 && is_null(reset($attributeValue))) return false;
+        return ['key' => 'Order.'.ucfirst($attributeKey), 'value' => $attributeValue];
     }
 
     private function getValue($attributeValue)
     {
         if (is_array($attributeValue)) {
             if (count($attributeValue) <= 1) {
-                return reset($attributeValue);
+                return false;
             }
         }
         return $attributeValue;
