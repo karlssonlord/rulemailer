@@ -203,10 +203,10 @@ class KL_Rulemailer_Model_Export_FieldsBuilder
         return $attributeValue;
     }
 
-    private function getAttributeValue($attribute, Mage_Sales_Model_Order_Item $item)
+    private function getAttributeValue($attributeCode, Mage_Sales_Model_Order_Item $item)
     {
         $product = $this->loadProduct($item);
-        $method = 'get'.ucfirst($attribute);
+        $method = 'get'.ucfirst($attributeCode);
         return $product->$method() ? : '';
     }
 
