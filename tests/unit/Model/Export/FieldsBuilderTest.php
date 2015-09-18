@@ -19,15 +19,19 @@ class FieldsBuilderTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function it_builds_up_the_fields_structures()
     {
+        $this->createAttribute('size', 'Size', 'text', 'simple');
+        $this->addAttributeOption('size', 'XXS');
         $this->addAttributeOption('manufacturer', 'Union Carbide');
+
         $this->addAttributeToAttributeSet(81, 4, 'Default');
 
         $product = Factory::make('catalog/product', [
             'sku' => 'foo',
             'weight' => 1.0,
-            'special_price' => null,
+                'special_price' => null,
             'price' => 495.0,
             'color' => 'Brun',
+            'size' => 'XXS',
             'manufacturer' => 3
         ]);
 
@@ -39,7 +43,8 @@ class FieldsBuilderTest extends PHPUnit_Framework_TestCase
         $fields = $fieldsBuilder->extractFields($order);
 
         $expected = [
-            ['key' => 'Order.Color', 'value' => ['Brun']],
+            ['key' => 'Order.Color', 'value' => ['Brun'], 'type' => 'multiple'],
+            ['key' => 'Order.Size', 'value' => ['XXS'], 'type' => 'multiple'],
             ['key' => 'Order.IncrementId', 'value' => $order->getIncrementId()],
             ['key' => 'Order.Date', 'value' => $order->getCreatedAt(), 'type' => 'date'],
             ['key' => 'Order.Firstname', 'value' => 'Foo'],

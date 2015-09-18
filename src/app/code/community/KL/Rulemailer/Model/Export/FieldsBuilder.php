@@ -109,7 +109,7 @@ class KL_Rulemailer_Model_Export_FieldsBuilder
     {
         $brands = array();
         foreach ($order->getAllItems() as $item) {
-            $product = $this->load($item);
+            $product = $this->loadProduct($item);
             $brands[] = $product->getAttributeText('manufacturer');
         }
         return $brands;
@@ -139,7 +139,9 @@ class KL_Rulemailer_Model_Export_FieldsBuilder
         $attributes = [];
         foreach (KL_Rulemailer_Model_Export_Attributes::defaultSet() as $attribute) {
             foreach ($order->getAllItems() as $item) {
-                $attributes[$attribute][] = $this->getAttributeValue($attribute, $item);
+                if ($this->isSimple($item) && $attributeValue = $this->getAttributeValue($attribute, $item)) {
+                    $attributes[$attribute][] = $attributeValue;
+                }
             }
         }
 
@@ -188,7 +190,7 @@ class KL_Rulemailer_Model_Export_FieldsBuilder
     private function buildKeyValue($attributeKey, $attributeValue)
     {
         if (count($attributeValue) == 1 && is_null(reset($attributeValue))) return false;
-        return ['key' => 'Order.'.ucfirst($attributeKey), 'value' => $attributeValue];
+        return ['key' => 'Order.'.ucfirst($attributeKey), 'value' => $attributeValue, 'type' => 'multiple'];
     }
 
     private function getValue($attributeValue)
@@ -203,16 +205,16 @@ class KL_Rulemailer_Model_Export_FieldsBuilder
 
     private function getAttributeValue($attribute, Mage_Sales_Model_Order_Item $item)
     {
-        $method = "get".ucfirst($attribute);
-        $product = $this->load($item);
-        return $product->$method();
+        $product = $this->loadProduct($item);
+        $method = 'get'.ucfirst($attribute);
+        return $product->$method() ? : '';
     }
 
     /**
      * @param Mage_Sales_Model_Order_Item $item
      * @return Mage_Core_Model_Abstract
      */
-    private function load(Mage_Sales_Model_Order_Item $item)
+    private function loadProduct(Mage_Sales_Model_Order_Item $item)
     {
         return $item->getProduct()->load($item->getProduct()->getId());
     }
