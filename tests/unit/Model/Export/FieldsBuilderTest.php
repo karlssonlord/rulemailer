@@ -19,8 +19,15 @@ class FieldsBuilderTest extends PHPUnit_Framework_TestCase
     /** @test */
     public function it_builds_up_the_fields_structures()
     {
-        $this->createAttribute('size', 'Size', 'text', 'simple');
+        $this->createAttribute('size', 'Size', 'select', 'simple');
         $this->addAttributeOption('size', 'XXS');
+        $this->addAttributeOption('size', 'XS');
+        $this->addAttributeOption('size', 'S');
+        $this->addAttributeOption('size', 'M');
+        $this->addAttributeOption('size', 'L');
+        $this->addAttributeOption('size', 'XL');
+        $this->addAttributeOption('size', 'XXL');
+        $this->addAttributeOption('size', 'XXXL');
         $this->addAttributeOption('manufacturer', 'Union Carbide');
 
         $this->addAttributeToAttributeSet(81, 4, 'Default');

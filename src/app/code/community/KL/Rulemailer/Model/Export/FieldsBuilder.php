@@ -171,7 +171,7 @@ class KL_Rulemailer_Model_Export_FieldsBuilder
      */
     private function getTaxAmount(Mage_Sales_Model_Order $order)
     {
-        return $order->getTaxMount();
+        return $order->getTaxAmount();
     }
 
     private function buildFields(array $attributes)
@@ -206,6 +206,10 @@ class KL_Rulemailer_Model_Export_FieldsBuilder
     private function getAttributeValue($attributeCode, Mage_Sales_Model_Order_Item $item)
     {
         $product = $this->loadProduct($item);
+        $versionInfo = Mage::getVersionInfo();
+        if ($versionInfo['minor'] < 9) {
+            return $product->getAttributeText($attributeCode);
+        }
         $method = 'get'.ucfirst($attributeCode);
         return $product->$method() ? : '';
     }
