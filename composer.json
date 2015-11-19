@@ -16,17 +16,20 @@
     ],
     "require-dev": {
         "magento-hackathon/magento-composer-installer": "2.1.1",
-        "magento/core": "1.9.1.0",
+        "magento/core": "~1.9",
         "phpunit/phpunit": "~4.5",
         "php-vcr/php-vcr": "~1.2",
         "php-vcr/phpunit-testlistener-vcr": "~1.1",
         "mockery/mockery": "0.9.*",
-        "vlucas/phpdotenv": "~1.1"
+        "vlucas/phpdotenv": "~1.1",
+        "magetest/manager": "~1.0"
     },
     "repositories": [
         {
             "type": "composer",
-            "url": "http://packages.firegento.com"
+            "url": "http://packages.firegento.com",
+            "type": "vcs",
+            "url": "git@github.com:dwickstrom/Manager.git"
         }
     ],
     "extra":{
@@ -41,7 +44,8 @@
                 "src/app/code/local",
                 "src/app/code/community",
                 "src/app/code/core",
-                "src/lib"
+                "src/lib",
+                "tests/support"
             ]
         }
     }

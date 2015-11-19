@@ -19,6 +19,7 @@ class ExportClerkTest extends PHPUnit_Framework_TestCase
         $apiResponse->shouldReceive('isError')->once()->andReturn(false);
 
         $api = Mockery::mock('KL_Rulemailer_Model_Api_Subscriber');
+        $api->shouldReceive('removeTag')->once();
         $api->shouldReceive('create')->once()->andReturn($apiResponse);
 
         $fieldsBuilder = Mockery::mock('KL_Rulemailer_Model_Export_FieldsBuilder');

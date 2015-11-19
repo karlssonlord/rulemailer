@@ -1,12 +1,15 @@
 <?php
 
-/**
- * Observer model
- */
-class KL_Rulemailer_Model_Observer extends KL_Rulemailer_Model_Abstract
+class KL_Rulemailer_Model_Observer
 {
+    /**
+     * @var null
+     */
     private $apiSubscriber;
 
+    /**
+     * @param null $apiSubscriber
+     */
     public function __construct($apiSubscriber = null)
     {
         $this->apiSubscriber = $apiSubscriber;

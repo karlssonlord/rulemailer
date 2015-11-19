@@ -50,8 +50,16 @@ class KL_Rulemailer_Model_Export_Clerk
             throw new InvalidArgumentException("The supplied customer email was not valid: {$customerEmail}");
         }
 
+        // Workaround, as specified by sam@rule.io - to allow for them to trigger different actions
+        // when customer has ordered a new item
+        try {
+            $this->remoteSubscriber->removeTag('order', $customerEmail);
+        } catch (Exception $e) {
+            Mage::log('Could not remove order tag: '.$e->getMessage(), null, 'KL_Rulemailer.log', true);
+        }
+
         // Create JSON object & make API call
-        $response = $this->remoteSubscriber->create($customerEmail, array('newsletter'), $fields);
+        $response = $this->remoteSubscriber->create($customerEmail, array('newsletter', 'order'), $fields);
 
         // Alert if all is not well
         if ($response->isError()) {

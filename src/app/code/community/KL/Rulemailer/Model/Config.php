@@ -1,6 +1,6 @@
 <?php
 
-class KL_Rulemailer_Model_Config extends KL_Rulemailer_Model_Abstract
+class KL_Rulemailer_Model_Config
 {
     /**
      * Configuration section.

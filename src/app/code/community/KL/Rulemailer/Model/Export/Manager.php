@@ -55,7 +55,7 @@ class KL_Rulemailer_Model_Export_Manager
                 try {
                     $this->exportClerk->conductExport($order);
                 } catch (Exception $e) {
-                    Mage::log($e->getMessage(), null, 'rulemailer.log', true);
+                    Mage::log($e->getMessage(), null, 'KL_Rulemailer.log', true);
                 }
             }
             $this->lastExported = $order->getId();

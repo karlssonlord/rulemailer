@@ -21,19 +21,6 @@ class SubscriberEndpointTest extends PHPUnit_Framework_TestCase
 
     /**
      * @test
-     * @vcr subscriber_find_all.yml
-     */
-    public function it_can_fetch_all_subscribers()
-    {
-        $subscriberEndpoint = new KL_Rulemailer_Model_Api_Subscriber;
-        $response = $subscriberEndpoint->findAll();
-
-        $this->assertEquals(200, $response->isSuccess());
-        $this->assertEquals(29, $response->toValue()['number_of_subscribers']);
-    }
-
-    /**
-     * @test
      * @vcr subscriber_find_one.yml
      */
     public function it_fetch_a_single_subscriber()
