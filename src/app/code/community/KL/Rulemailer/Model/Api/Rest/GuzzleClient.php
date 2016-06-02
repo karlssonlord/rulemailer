@@ -1,7 +1,5 @@
 <?php
 
-  //require_once __DIR__ . '/guzzle.phar';
-
 use GuzzleHttp\Client;
 
 /**
@@ -13,7 +11,7 @@ class KL_Rulemailer_Model_Api_Rest_GuzzleClient implements KL_Rulemailer_Model_A
     /**
      * Base url
      */
-    const BASE_URL = 'http://app.rule.io/api/v1/';
+    const BASE_URL = 'http://app.rule.io/api/v2/';
     /**
      * @var null
      */
