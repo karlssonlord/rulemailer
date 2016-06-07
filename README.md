@@ -14,6 +14,10 @@ Data export happens asynchronously, not to induce potential delays. For example 
 
 This module can be installed which ever way you like, either through modman or composer, or if you want to you can manually place the files into the correct places.
 
+## Warning
+
+You need to run `conposer install` before using this module due to requirements if using manual or modman install. Also 'vendor/autorun.php' should be included in your bootstrap file for magento.
+
 #### Cron setup
 This module assumes that the *Magento cron* is running on your server. Otherwise there will be no customer data exported to Rule, other than the subscriber email.
 
