@@ -48,5 +48,8 @@
                 "tests/support"
             ]
         }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "~6.2"
     }
 }

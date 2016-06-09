@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/guzzle.phar';
+  //require_once __DIR__ . '/guzzle.phar';
 
 use GuzzleHttp\Client;
 
@@ -14,7 +14,6 @@ class KL_Rulemailer_Model_Api_Rest_GuzzleClient implements KL_Rulemailer_Model_A
      * Base url
      */
     const BASE_URL = 'http://app.rule.io/api/v1/';
-
     /**
      * @var null
      */
@@ -23,14 +22,12 @@ class KL_Rulemailer_Model_Api_Rest_GuzzleClient implements KL_Rulemailer_Model_A
     /**
      * @param $client
      */
-    public function __construct($client)
+    public function __construct($client = null)
     {
         $client = $client ? : new Client([
-            'base_url' => self::BASE_URL,
-            'defaults' => [
-                'headers' => ['Accept-Charset' => 'ISO-8859-1,utf-8'],
-                'query' => ['apikey' => $this->getApiKey()]
-            ]
+            'base_uri' => self::BASE_URL,
+            'query' => ['apikey' => $this->getApiKey()],
+            'headers' => ['Accept-Charset' => 'ISO-8859-1,utf-8'],
         ]);
 
         $this->setHttpClient($client);

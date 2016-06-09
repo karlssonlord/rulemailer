@@ -1,6 +1,6 @@
 <?php
 
-use GuzzleHttp\Message\ResponseInterface;
+use GuzzleHttp\Psr7\Response;
 
 class KL_Rulemailer_Model_Api_Rest_Response
 {
@@ -25,10 +25,10 @@ class KL_Rulemailer_Model_Api_Rest_Response
      * Assigns the HTTP response to a property, as well as the body
      * representation. It then attempts to decode the body as JSON.
      */
-    public function __construct(ResponseInterface $response)
+    public function __construct(Response $response)
     {
         $this->httpResponse = $response;
-        $this->jsonBody = $response->json();
+        $this->jsonBody = json_decode($response->getBody());
     }
 
     /**
