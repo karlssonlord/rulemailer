@@ -34,13 +34,17 @@ class KL_Rulemailer_Model_Api_Subscriber extends KL_Rulemailer_Model_Api_Rest
         // Validate if identifier is used
         $this->validateEmailAddress($email, 'email');
 
+        $subscriber = [
+            'email' => $email,
+            'fields' => $fields
+        ];
+
         $data = array();
-        $data['email'] = $email;
         $data['tags'] = $tags;
-        $data['fields'] = $fields;
         $data['update_on_duplicate'] = $updateOnDuplicate;
         $data['auto_create_tags']    = $autoCreateTags;
         $data['auto_create_fields']  = $autoCreateFields;
+        $data['subscribers'] = [$subscriber];
 
         $response = $this->client->post(static::SUBSCRIBERS_PATH, $data);
         return new KL_Rulemailer_Model_Api_Rest_Response($response);
