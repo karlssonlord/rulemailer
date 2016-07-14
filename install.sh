@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# WARN: This file is for build server only
 red=`tput setaf 1`
 green=`tput setaf 2`
 reset=`tput sgr0`

@@ -1,5 +1,6 @@
 {
     "name": "karlssonlord/rulemailer",
+    "type": "magento-module",
     "authors": [
       {
         "name": "Robert Lord",
@@ -15,7 +16,6 @@
       }
     ],
     "require-dev": {
-        "magento-hackathon/magento-composer-installer": "2.1.1",
         "magento/core": "~1.9",
         "phpunit/phpunit": "~4.5",
         "php-vcr/php-vcr": "~1.2",
@@ -35,7 +35,11 @@
     "extra":{
         "magento-root-dir": "src/",
         "magento-deploystrategy": "symlink",
-        "auto-append-gitignore": true
+        "auto-append-gitignore": true,
+        "map": [
+            ["src/app/code/community/KL/Rulemailer", "app/code/community/KL/Rulemailer"],
+            ["src/app/etc/modules/KL_Rulemailer.xml", "app/etc/modules/KL_Rulemailer.xml"]
+        ]
     },
     "autoload": {
         "psr-0": {
@@ -50,6 +54,7 @@
         }
     },
     "require": {
+        "magento-hackathon/magento-composer-installer": "2.1.1",
         "guzzlehttp/guzzle": "~6.2"
     }
 }
