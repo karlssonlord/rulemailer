@@ -64,8 +64,6 @@ class KL_Rulemailer_Model_Email_Template
                         '',
                         false
                     );
-
-                Mage::log($result, null, 'result.log', true);
             } catch(Exception $e) {
                 Mage::log($e->getMessage(), null, 'result.log', true);
             }

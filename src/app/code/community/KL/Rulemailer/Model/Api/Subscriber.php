@@ -14,6 +14,16 @@ class KL_Rulemailer_Model_Api_Subscriber extends KL_Rulemailer_Model_Api_Rest
     const SUBSCRIBERS_PATH = 'subscribers';
 
     /**
+     * Set api custom api key for client
+     *
+     * @param string $apiKey Api key for Rule
+     */
+    public function setApiKey($apiKey)
+    {
+        $this->client->setApiKey($apiKey);
+    }
+
+    /**
      * Create subscriber
      *
      * @param string $email             Email address

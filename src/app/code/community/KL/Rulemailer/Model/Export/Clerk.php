@@ -32,6 +32,7 @@ class KL_Rulemailer_Model_Export_Clerk
      */
     public function conductExport(Mage_Sales_Model_Order $order)
     {
+        $this->remoteSubscriber->setApiKey(Mage::getStoreConfig('kl_rulemailer_settings/general/key', $order->getStoreId()));
         $this->updateFields($this->fieldsBuilder->extractFields($order), $order->getCustomerEmail());
     }
 

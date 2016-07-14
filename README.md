@@ -1,6 +1,5 @@
 # RuleMailer Magento Extension
 
-[![Build Status](https://travis-ci.org/karlssonlord/rulemailer.svg)](https://travis-ci.org/karlssonlord/rulemailer)
 
 Magento module for integrating RuleMailer into Magento CE/EE. This module keeps your newsletter subscribers in sync and is also capable of exporting subscriber order data.
 Data export happens asynchronously, not to induce potential delays. For example if the subscribe-action takes place as part of the checkout process.
@@ -16,7 +15,9 @@ This module can be installed which ever way you like, either through modman or c
 
 ## Warning
 
-You need to run `conposer install` before using this module due to requirements if using manual or modman install. Also 'vendor/autorun.php' should be included in your bootstrap file for magento.
+You need to run `composer install --no-dev` before using this module due to requirements if using manual or modman install. Also 'vendor/autorun.php' should be included in your bootstrap file for magento.
+Alternatively you could just run `composer require guzzlehttp/guzzle` in magento root dir.
+
 
 #### Cron setup
 This module assumes that the *Magento cron* is running on your server. Otherwise there will be no customer data exported to Rule, other than the subscriber email.
