@@ -51,13 +51,12 @@ class KL_Rulemailer_Model_Export_Manager
         $orders = $this->getOrdersCollection();
         if (count($orders) === 0) return;
         foreach ($orders as $order) {
-            if ($this->isOrderedBySubscriber($order->getCustomerEmail())) {
-                try {
-                    $this->exportClerk->conductExport($order);
-                } catch (Exception $e) {
-                    Mage::log($e->getMessage(), null, 'KL_Rulemailer.log', true);
-                }
+            try {
+                $this->exportClerk->conductExport($order);
+            } catch (Exception $e) {
+                Mage::log($e->getMessage(), null, 'KL_Rulemailer.log', true);
             }
+
             $this->lastExported = $order->getId();
         }
         // Remember which order was the last one to have been exported
@@ -84,6 +83,7 @@ class KL_Rulemailer_Model_Export_Manager
     private function getOrdersCollection()
     {
         $lastExported = Mage::getStoreConfig('kl_rulemailer/last_exported/order_id') ? : 0;
+
         return $this->order
             ->getCollection()
             ->addAttributeToFilter('entity_id', array('gt' => $lastExported))

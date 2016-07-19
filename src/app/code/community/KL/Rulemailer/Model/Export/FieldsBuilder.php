@@ -66,16 +66,14 @@ class KL_Rulemailer_Model_Export_FieldsBuilder
     {
         $categoryIds = array();
         foreach ($order->getAllVisibleItems() as $item) {
-            $product = $this->product->load($item->getId());
-            foreach (explode('/', $product->getCategoryIds()) as $categoryId) {
+            $product = $this->product->load($item->getProductId());
+
+            foreach ($product->getCategoryIds() as $categoryId) {
                 if (!in_array($categoryId, $categoryIds)) {
                     $categoryIds[] = $categoryId;
                 }
             }
         }
-
-        // Sort the category ids in ascending order
-        ksort($categoryIds);
 
         $categories = array();
         foreach ($categoryIds as $categoryId) {

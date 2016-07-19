@@ -60,7 +60,7 @@ class KL_Rulemailer_Model_Export_Clerk
         }
 
         // Create JSON object & make API call
-        $response = $this->remoteSubscriber->create($customerEmail, array('newsletter', 'order'), $fields);
+        $response = $this->remoteSubscriber->create($customerEmail, array('order'), $fields);
 
         // Alert if all is not well
         if ($response->isError()) {

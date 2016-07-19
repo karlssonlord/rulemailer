@@ -76,7 +76,7 @@ class KL_Rulemailer_Model_Observer
                     /**
                      * Add new subscriber
                      */
-                    $this->addSubscriber($dummyCustomer, array(), array());
+                    $this->addSubscriber($dummyCustomer, array('newsletter'), array());
                 }
             } else {
 
@@ -97,7 +97,7 @@ class KL_Rulemailer_Model_Observer
                     }
 
                     // Add or update
-                    $this->addSubscriber($customer, array(), array());
+                    $this->addSubscriber($customer, array("newsletter"), array());
 
                 } else {
                     // Remove
@@ -145,8 +145,9 @@ class KL_Rulemailer_Model_Observer
                     // Set the data fields of the address
                     $fields = Mage::getModel('customer/address')->load($data['entity_id'])->getData();
 
+                    $this->logData(json_encode($fields));
                     // Add or update the subscriber
-                    $this->addSubscriber($customer, array(), array());
+                    $this->addSubscriber($customer, array(), $fields);
 
                 } else {
                     $this->logData("Removing subscriber " . $customer->getData('email'));
@@ -181,10 +182,6 @@ class KL_Rulemailer_Model_Observer
      */
     public function addSubscriber($customer, array $tags, $fields = null)
     {
-        if (!in_array('newsletter', $tags)) {
-            $tags[] = 'newsletter';
-        }
-
         $fields = $this->buildFields($fields);
 
         $response = $this->getApiSubscriber()->create($customer->getData('email'), $tags, $fields, true, true, true);
