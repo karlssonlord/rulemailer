@@ -22,22 +22,32 @@
             </core>
         </models>
         <events>
-            <customer_address_save_after>
+            <checkout_cart_save_after>
+                <observers>
+                    <cart_save_after_handler>
+                        <type>model</type>
+                        <class>rulemailer/observer</class>
+                        <method>processCart</method>
+                        <args></args>
+                    </cart_save_after_handler>
+                </observers>
+            </checkout_cart_save_after>
+            <customer_save_after>
                 <observers>
                     <customer_save_after_handler>
                         <type>model</type>
                         <class>rulemailer/observer</class>
-                        <method>addressUpdate</method>
+                        <method>processCustomer</method>
                         <args></args>
                     </customer_save_after_handler>
                 </observers>
-            </customer_address_save_after>
+            </customer_save_after>
             <newsletter_subscriber_save_commit_after>
                 <observers>
                     <newsletter_subscriber_save_before_handler>
                         <type>model</type>
                         <class>rulemailer/observer</class>
-                        <method>manageSubscription</method>
+                        <method>processSubscriber</method>
                         <args></args>
                     </newsletter_subscriber_save_before_handler>
                 </observers>
@@ -57,6 +67,7 @@
     <default>
         <kl_rulemailer_settings>
             <general>
+                <module_enabled>1</module_enabled>
                 <logging>1</logging>
                 <transactional>0</transactional>
             </general>

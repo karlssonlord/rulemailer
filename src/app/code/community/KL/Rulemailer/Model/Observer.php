@@ -2,6 +2,10 @@
 
 class KL_Rulemailer_Model_Observer
 {
+    const CART_IN_PROGRESS_TAG = "CartInProgress";
+    const NEWSLETTER_TAG = "Newsletter";
+    const COMPLETE_ORDER_TAG = "Order";
+
     /**
      * @var null
      */
@@ -13,6 +17,7 @@ class KL_Rulemailer_Model_Observer
     public function __construct($apiSubscriber = null)
     {
         $this->apiSubscriber = $apiSubscriber;
+        $this->fieldsBuilder = new KL_Rulemailer_Model_Export_FieldsBuilder;
     }
 
     /**
@@ -41,6 +46,21 @@ class KL_Rulemailer_Model_Observer
         }
     }
 
+    public function processCart(Varien_Event_Observer $observer)
+    {
+        if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+            $customer = Mage::getSingleton('customer/session')->getCustomer();
+            $quote = $observer->getEvent()->getCart()->getQuote();
+
+            $fields = array_merge(
+                $this->fieldsBuilder->extractCustomerFields($customer),
+                $this->fieldsBuilder->extractCartFields($quote)
+            );
+
+            $this->addSubscriber($customer->getEmail(), array(self::CART_IN_PROGRESS_TAG), $fields, true, true, true);
+        }
+    }
+
     /**
      * Manage subscription
      *
@@ -48,7 +68,7 @@ class KL_Rulemailer_Model_Observer
      *
      * @return Varien_Event_Observer
      */
-    public function manageSubscription(Varien_Event_Observer $observer)
+    public function processSubscriber(Varien_Event_Observer $observer)
     {
         try {
             $event = $observer->getEvent();
@@ -89,15 +109,9 @@ class KL_Rulemailer_Model_Observer
                     // Fetch address
                     $addressId = $customer->getDefaultBillingAddress();
 
-                    if (is_object($addressId)) {
-                        $addressId = $addressId->getId();
-                        $fields = Mage::getModel('customer/address')->load($addressId)->getData();
-                    } else {
-                        $fields = array();
-                    }
-
+                    $fields = $this->fieldsBuilder->extractCustomerFields($customer);
                     // Add or update
-                    $this->addSubscriber($customer, array("newsletter"), array());
+                    $this->addSubscriber($customer, array("newsletter"), $fields);
 
                 } else {
                     // Remove
@@ -116,12 +130,12 @@ class KL_Rulemailer_Model_Observer
     }
 
     /**
-     * Address update
+     * Create RULE subscriber or update existing on customer save
      *
      * @param Varien_Event_Observer $observer
      * @return Varien_Event_Observer
      */
-    public function addressUpdate(Varien_Event_Observer $observer)
+    public function processCustomer(Varien_Event_Observer $observer)
     {
         try {
             // Fetch observer data
@@ -131,8 +145,7 @@ class KL_Rulemailer_Model_Observer
                 ->getData();
 
             // Load customer object
-            $customer = Mage::getModel('customer/customer')->load($data['parent_id']);
-
+            $customer = $observer->getCustomer();
             // Update if it's an object
             if (is_object($customer)) {
 
@@ -141,14 +154,12 @@ class KL_Rulemailer_Model_Observer
 
                 // Make sure we'd like to receive newsletters
                 if ($newsletter->getData('subscriber_status') == '1') {
-
                     // Set the data fields of the address
                     $fields = Mage::getModel('customer/address')->load($data['entity_id'])->getData();
 
                     $this->logData(json_encode($fields));
                     // Add or update the subscriber
                     $this->addSubscriber($customer, array(), $fields);
-
                 } else {
                     $this->logData("Removing subscriber " . $customer->getData('email'));
                     $this->removeSubscriber($customer);
@@ -182,8 +193,6 @@ class KL_Rulemailer_Model_Observer
      */
     public function addSubscriber($customer, array $tags, $fields = null)
     {
-        $fields = $this->buildFields($fields);
-
         $response = $this->getApiSubscriber()->create($customer->getData('email'), $tags, $fields, true, true, true);
 
         if ($response->isError()) {
@@ -216,27 +225,4 @@ class KL_Rulemailer_Model_Observer
 
         $this->logData("Removed tag newsletter from subscriber " . $customer->getData('email'));
     }
-
-    /**
-     * Build fields
-     *
-     * @param $fields
-     * @return array
-     */
-    private function buildFields($fields)
-    {
-        $builtFields = array();
-
-        if (is_array($fields)) {
-            foreach ($fields as $key => $value) {
-                $addFields[] = array(
-                    'key' => $key,
-                    'value' => $value
-                );
-            }
-        }
-
-        return $builtFields;
-    }
-
 }
