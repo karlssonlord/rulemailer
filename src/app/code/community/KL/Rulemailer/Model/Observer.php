@@ -57,7 +57,7 @@ class KL_Rulemailer_Model_Observer
                 $this->fieldsBuilder->extractCartFields($quote)
             );
 
-            $this->addSubscriber($customer->getEmail(), array(self::CART_IN_PROGRESS_TAG), $fields, true, true, true);
+            $this->addSubscriber($customer, array(self::CART_IN_PROGRESS_TAG), $fields, true, true, true);
         }
     }
 
