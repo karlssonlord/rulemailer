@@ -64,20 +64,6 @@ class KL_Rulemailer_Model_Export_Manager
     }
 
     /**
-     * @param $email
-     * @return bool
-     */
-    private function isOrderedBySubscriber($email)
-    {
-        $emailExist = $this->newsletterSubscriber->load($email, 'subscriber_email');
-
-        if ($emailExist->getId()) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
      * @return mixed
      */
     private function getOrdersCollection()

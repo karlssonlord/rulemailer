@@ -241,16 +241,6 @@ class KL_Rulemailer_Model_Export_FieldsBuilder
         return ['key' => 'Order.'.ucfirst($attributeKey), 'value' => $attributeValue, 'type' => 'multiple'];
     }
 
-    private function getValue($attributeValue)
-    {
-        if (is_array($attributeValue)) {
-            if (count($attributeValue) <= 1) {
-                return false;
-            }
-        }
-        return $attributeValue;
-    }
-
     private function getAttributeValue($attributeCode, Mage_Sales_Model_Order_Item $item)
     {
         $product = $this->loadProduct($item);

@@ -1,6 +1,7 @@
 {
     "name": "karlssonlord/rulemailer",
     "type": "magento-module",
+    "version": "0.0.4",
     "authors": [
       {
         "name": "Robert Lord",
@@ -27,7 +28,9 @@
     "repositories": [
         {
             "type": "composer",
-            "url": "http://packages.firegento.com",
+            "url": "http://packages.firegento.com"
+        },
+        {
             "type": "vcs",
             "url": "git@github.com:dwickstrom/Manager.git"
         }

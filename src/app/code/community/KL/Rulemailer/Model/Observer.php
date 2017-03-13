@@ -57,7 +57,7 @@ class KL_Rulemailer_Model_Observer
                 $this->fieldsBuilder->extractCartFields($quote)
             );
 
-            $this->addSubscriber($customer, array(self::CART_IN_PROGRESS_TAG), $fields, true, true, true);
+            $this->addSubscriber($customer, array(self::CART_IN_PROGRESS_TAG), $fields);
         }
     }
 
@@ -106,9 +106,6 @@ class KL_Rulemailer_Model_Observer
                 $customer = Mage::getModel('customer/customer')->load($data['customer_id']);
 
                 if ($subscriber->isSubscribed()) {
-                    // Fetch address
-                    $addressId = $customer->getDefaultBillingAddress();
-
                     $fields = $this->fieldsBuilder->extractCustomerFields($customer);
                     // Add or update
                     $this->addSubscriber($customer, array("newsletter"), $fields);
@@ -220,7 +217,7 @@ class KL_Rulemailer_Model_Observer
         $response = $this->getApiSubscriber()->removeTag('newsletter', $customer->getData('email'));
 
         if ($response->isError()) {
-           return  $this->logData("When removing subscriber tag (" . $customer->getData('email') . "), got code error: " . $response->getError());
+           $this->logData("When removing subscriber tag (" . $customer->getData('email') . "), got code error: " . $response->getError());
         }
 
         $this->logData("Removed tag newsletter from subscriber " . $customer->getData('email'));
