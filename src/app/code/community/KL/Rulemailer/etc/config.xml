@@ -73,4 +73,17 @@
             </general>
         </kl_rulemailer_settings>
     </default>
+    <frontend>
+        <routers>
+            <rulemailer>
+                <use>standard</use>
+                <args>
+                    <module>KL_Rulemailer</module>
+                    <frontName>rulemailer</frontName>
+                </args>
+            </rulemailer>
+        </routers>
+    </frontend>
 </config>
+
+
