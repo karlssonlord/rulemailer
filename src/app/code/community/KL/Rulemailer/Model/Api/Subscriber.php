@@ -46,6 +46,7 @@ class KL_Rulemailer_Model_Api_Subscriber extends KL_Rulemailer_Model_Api_Rest
 
         $subscriber = [
             'email' => $email,
+            'language' => Mage::getStoreConfig('general/locale/code', Mage::app()->getStore()->getId()),
             'fields' => $fields
         ];
 
