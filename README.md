@@ -1,4 +1,13 @@
-# RuleMailer Magento Extension
+# This plugin is deprecated - [upgrade to Magento 2](https://github.com/rulecom/rulemailer2)
+On June 30, 2020, Magento 1 reached [end of life](https://community.magento.com/t5/Magento-DevBlog/How-Extension-Developers-Can-Prepare-for-M1-End-of-Life/ba-p/446216). For this reason we are deprecating this Magento 1 plugin, to focus our efforts on our [Magento 2 plugin](https://github.com/rulecom/rulemailer2). 
+This repo will be online for a limited for legacy reasons, but no further updates will be made.   
+
+**We recommend** you to *update to Magento 2* at your earliest convenience and then install our [plugin for Magento 2](https://github.com/rulecom/rulemailer2).  
+
+
+
+# Deprecated legacy description below
+## RuleMailer Magento Extension
 
 
 Magento module for integrating RuleMailer into Magento CE/EE. This module keeps your newsletter subscribers in sync and is also capable of exporting subscriber order data.
